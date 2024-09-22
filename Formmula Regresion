@@ -1,0 +1,39 @@
+# prompt: Crea para mi una funcion de regresion lineal en base a la funcion lineal con eje x en paquetes vendidos y el eje y dinero ganando , siendo la variable independiente los paquetes y la dependiente el dinero , el corte con el eje y se da en el origen por favor
+
+import numpy as np
+
+def regresion_lineal(paquetes_vendidos, dinero_ganado):
+  """
+  Calcula la regresión lineal para la relación entre paquetes vendidos y dinero ganado.
+
+  Args:
+    paquetes_vendidos: Una lista o array de NumPy con los números de paquetes vendidos.
+    dinero_ganado: Una lista o array de NumPy con los montos de dinero ganados.
+
+  Returns:
+    Una tupla con la pendiente (m) y el intercepto (b) de la línea de regresión.
+  """
+  n = len(paquetes_vendidos)
+  
+  # Calcular las sumas necesarias
+  sum_x = np.sum(paquetes_vendidos)
+  sum_y = np.sum(dinero_ganado)
+  sum_xy = np.sum(paquetes_vendidos * dinero_ganado)
+  sum_x2 = np.sum(paquetes_vendidos ** 2)
+
+  # Calcular la pendiente (m)
+  m = (n * sum_xy - sum_x * sum_y) / (n * sum_x2 - sum_x ** 2)
+
+  # Como el corte con el eje y es en el origen, b = 0
+  b = 0
+  
+  return m, b
+
+# Ejemplo de uso
+paquetes = np.array([1, 2, 3, 4, 5])
+dinero = np.array([10, 20, 30, 40, 50])
+
+pendiente, intercepto = regresion_lineal(paquetes, dinero)
+
+print("Pendiente (m):", pendiente)
+print("Intercepto (b):", intercepto) 
